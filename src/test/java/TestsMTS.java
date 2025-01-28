@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -44,10 +43,10 @@ public class TestsMTS {
 
         //for (int i = 0; i < optionList.size(); i++) {
         //    optionList.get(i).click();
-            List<WebElement> inputs = divPay.findElements(By.tagName("input"));
-            for (WebElement input : inputs) {
-                assertTrue(input.getText().equals(""));
-            }
+        List<WebElement> inputs = divPay.findElements(By.tagName("input"));
+        for (WebElement input : inputs) {
+            assertTrue(input.getText().equals(""));
+        }
         //}
 
     }
@@ -65,20 +64,28 @@ public class TestsMTS {
         WebElement sum = driver.findElement(By.id("connection-sum"));
         WebElement email = driver.findElement(By.id("connection-email"));
         WebElement continueBut = driver.findElement(By.xpath("//*[@id=\"pay-connection\"]/button"));
-        //WebElement frame = driver.
         Actions builder = new Actions(driver);
         builder
                 .click(number)
-                .sendKeys(number,"297777777")
+                .sendKeys(number, "297777777")
                 .click(sum)
                 .sendKeys(sum, "100")
                 .click(email)
-                .sendKeys(email,"test@test.ru")
+                .sendKeys(email, "test@test.ru")
                 .click(continueBut)
                 //.moveToElement(frame)
                 .build()
                 .perform();
 
+        WebElement frame = driver.findElement(By.cssSelector("body > div.bepaid-app > div > iframe"));
+        driver.switchTo().frame(frame);
+
+
+        WebElement sumFrame = driver.findElement(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/div/div[1]/span[1]"));
+        WebElement numberFrame = driver.findElement(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/div/div[2]/span"));
+        WebElement continueButFrame = driver.findElement(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/button"));
+
+        assertTrue(sumFrame.getText() == sum.getText());
     }
 
 
