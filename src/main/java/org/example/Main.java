@@ -56,13 +56,12 @@ public class Main {
                 .click(email)
                 .sendKeys(email, "test@test.ru")
                 .click(continueBut)
-                //.moveToElement()
                 .build()
                 .perform();
 
 
-        WebElement frame1 = driver.findElement(By.className("bepaid-iframe"));
-        driver.switchTo().frame(frame1);
+        WebElement payFrame = driver.findElement(By.className("bepaid-iframe"));
+        driver.switchTo().frame(payFrame);
 
 
         WebElement sumFrame =driver.findElement(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/div"));
