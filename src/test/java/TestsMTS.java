@@ -24,7 +24,7 @@ public class TestsMTS {
 
     @AfterEach
     public void close() {
-        //driver.quit();
+        driver.quit();
     }
 
     @Test
@@ -84,6 +84,14 @@ public class TestsMTS {
 
         for (WebElement input : inputs) {
             assertTrue(input.getText().equals(""));
+        }
+
+        //WebElement imgDiv = driver.findElement(By.className("card ng-tns-c61-0"));
+        WebElement imgDiv = driver.findElement(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]"));
+        List <WebElement> images = imgDiv.findElements(By.tagName("img"));
+
+        for (WebElement image : images) {
+            assertTrue(image.getAttribute("src") != null);
         }
     }
 
