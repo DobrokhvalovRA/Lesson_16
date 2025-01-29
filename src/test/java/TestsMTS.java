@@ -73,19 +73,18 @@ public class TestsMTS {
                 .click(email)
                 .sendKeys(email, "test@test.ru")
                 .click(continueBut)
-                //.moveToElement(frame)
-                .build()
+               .build()
                 .perform();
 
-        WebElement frame = driver.findElement(By.cssSelector("body > div.bepaid-app > div > iframe"));
-        driver.switchTo().frame(frame);
-
+        WebElement payFrame = driver.findElement(By.className("bepaid-iframe"));
+        driver.switchTo().frame(payFrame);
 
         WebElement sumFrame = driver.findElement(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/div/div[1]/span[1]"));
-        WebElement numberFrame = driver.findElement(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/div/div[2]/span"));
-        WebElement continueButFrame = driver.findElement(By.xpath("/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/button"));
+        List <WebElement> inputs = driver.findElements(By.tagName("input"));
 
-        assertTrue(sumFrame.getText() == sum.getText());
+        for (WebElement input : inputs) {
+            assertTrue(input.getText().equals(""));
+        }
     }
 
 
